@@ -1,11 +1,8 @@
-// Firebase configuration placeholder.
-// لا تضع مفاتيح أو بيانات حقيقية هنا قبل إنشاء مشروع Firebase.
-// بعد إنشاء المشروع سنستبدل القيم التالية بإعدادات Web App الرسمية.
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyAAOVJej0ya3tPMXDrDgD5fRjKfYnbDwzs",
+  authDomain: "quiz-23b0f.firebaseapp.com",
+  projectId: "quiz-23b0f",
+  storageBucket: "quiz-23b0f.firebasestorage.app",
+  messagingSenderId: "1034446931342",
+  appId: "1:1034446931342:web:70306910723665ee0610df"
 };
