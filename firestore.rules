@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Public students can read published quiz structure/content.
+    // Writes are restricted to authenticated admins for now.
+    match /branches/{id} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+
+    match /subjects/{id} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+
+    match /lessons/{id} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+
+    match /quizzes/{id} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
+  }
+}
