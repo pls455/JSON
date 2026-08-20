@@ -1,292 +1,49 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="تحويل JSON إلى CSV مباشرة داخل المتصفح." />
-  <title>JSON → CSV</title>
-  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: rgba(18, 25, 45, .82);
-      --panel-2: #11182b;
-      --border: rgba(255,255,255,.10);
-      --text: #f5f7fb;
-      --muted: #9aa6bd;
-      --accent: #7c5cff;
-      --accent-2: #6046e8;
-      --danger: #ff6b81;
-      --success: #49d39b;
-      --shadow: 0 24px 70px rgba(0,0,0,.35);
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 15% 10%, rgba(124,92,255,.20), transparent 30%),
-        radial-gradient(circle at 85% 85%, rgba(73,211,155,.10), transparent 25%),
-        var(--bg);
-    }
-
-    .container { width: min(1100px, calc(100% - 28px)); margin: 0 auto; padding: 34px 0 50px; }
-    header { text-align: center; margin-bottom: 28px; }
-    .logo {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
-      background: rgba(255,255,255,.04); color: #cfc7ff; font-size: 13px;
-    }
-    h1 { margin: 18px 0 8px; font-size: clamp(30px, 6vw, 54px); letter-spacing: -1.5px; }
-    header p { margin: 0; color: var(--muted); font-size: 16px; }
-
-    .card {
-      background: var(--panel); border: 1px solid var(--border); border-radius: 24px;
-      box-shadow: var(--shadow); backdrop-filter: blur(18px); overflow: hidden;
-    }
-    .editor { padding: 18px; }
-    .label-row { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; }
-    .label { font-weight: 700; }
-    .hint { color: var(--muted); font-size: 12px; }
-    textarea {
-      width: 100%; min-height: 330px; resize: vertical; border: 1px solid var(--border);
-      border-radius: 16px; background: #090e1b; color: #dfe6f5; padding: 18px;
-      font: 14px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      outline: none; direction: ltr; text-align: left;
-    }
-    textarea:focus { border-color: rgba(124,92,255,.75); box-shadow: 0 0 0 4px rgba(124,92,255,.10); }
-
-    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-    button {
-      border: 0; border-radius: 12px; padding: 12px 18px; cursor:pointer;
-      font: inherit; font-weight: 750; transition: .18s ease; color: var(--text);
-      background: #202941; border: 1px solid var(--border);
-    }
-    button:hover { transform: translateY(-1px); filter: brightness(1.08); }
-    button.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; }
-    button:disabled { opacity:.45; cursor:not-allowed; transform:none; }
-
-    .status { min-height: 24px; margin-top: 12px; font-size: 13px; color: var(--muted); }
-    .status.error { color: var(--danger); }
-    .status.success { color: var(--success); }
-
-    .result { margin-top: 18px; }
-    .result-head { padding: 18px 18px 0; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .result-head h2 { margin:0; font-size:18px; }
-    .table-wrap { overflow:auto; margin: 14px 18px 18px; border:1px solid var(--border); border-radius:16px; max-height:460px; }
-    table { width:100%; border-collapse:collapse; min-width:520px; direction:ltr; }
-    th, td { padding:11px 13px; border-bottom:1px solid var(--border); text-align:left; white-space:nowrap; }
-    th { position:sticky; top:0; background:var(--panel-2); color:#d9d2ff; font-size:13px; z-index:1; }
-    td { color:#d4dbea; font-size:13px; }
-    tr:last-child td { border-bottom:0; }
-
-    .empty { padding: 45px 20px; text-align:center; color:var(--muted); }
-    footer { text-align:center; color:#69758d; font-size:12px; margin-top:20px; }
-    @media (max-width: 600px) {
-      .container { padding-top: 22px; }
-      .card { border-radius:18px; }
-      textarea { min-height: 280px; }
-      .actions button { flex:1 1 calc(50% - 5px); }
-      .result-head { align-items:flex-start; flex-direction:column; }
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="محول JSON إلى CSV سريع وآمن يعمل بالكامل داخل المتصفح."><meta name="theme-color" content="#070a12">
+<title>JSON → CSV | تحويل JSON إلى CSV</title>
+<style>
+:root{--bg:#070a12;--panel:rgba(15,20,34,.78);--panel2:#0d1322;--line:rgba(255,255,255,.09);--text:#f4f7ff;--muted:#8995ad;--accent:#7c5cff;--accent2:#22d3ee;--good:#42d392;--bad:#ff647c;--radius:22px;--shadow:0 30px 90px rgba(0,0,0,.38)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(124,92,255,.22),transparent 30%),radial-gradient(circle at 90% 70%,rgba(34,211,238,.10),transparent 28%),var(--bg);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+.container{width:min(1120px,calc(100% - 28px));margin:auto;padding:30px 0 55px}.hero{text-align:center;padding:25px 0 30px;animation:rise .7s ease both}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:#c9c2ff;font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 15px var(--good);animation:pulse 2s infinite}h1{font-size:clamp(38px,8vw,70px);letter-spacing:-3px;margin:17px 0 8px;line-height:1.02}h1 span{background:linear-gradient(100deg,#fff 25%,#b8aaff 65%,#72e9f7);-webkit-background-clip:text;background-clip:text;color:transparent} .hero p{margin:0 auto;color:var(--muted);font-size:15px;max-width:600px;line-height:1.8}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(20px);animation:rise .7s .08s ease both}.editor{padding:18px}.label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.label{font-weight:800}.hint{font-size:12px;color:var(--muted)}textarea{display:block;width:100%;height:330px;resize:vertical;min-height:210px;max-height:650px;border:1px solid var(--line);border-radius:16px;background:#070b15;color:#dce5f8;padding:18px;font:13px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace;direction:ltr;text-align:left;outline:none;transition:border-color .2s,box-shadow .2s,transform .2s}textarea:focus{border-color:rgba(124,92,255,.8);box-shadow:0 0 0 4px rgba(124,92,255,.11);transform:translateY(-1px)}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}button{appearance:none;border:1px solid var(--line);border-radius:12px;padding:11px 16px;color:var(--text);background:#1a2235;font:inherit;font-weight:750;cursor:pointer;transition:transform .18s,filter .18s,background .18s,box-shadow .18s}button:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 10px 25px rgba(0,0,0,.2)}button:active:not(:disabled){transform:translateY(0) scale(.98)}button:disabled{opacity:.4;cursor:not-allowed}.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),#5b42e6);box-shadow:0 8px 25px rgba(124,92,255,.2)}.shortcut{margin-right:auto;color:var(--muted);font-size:11px;align-self:center}.status{min-height:22px;padding-top:10px;font-size:13px;color:var(--muted);transition:opacity .2s}.status.good{color:var(--good)}.status.bad{color:var(--bad)}
+.result{margin-top:16px;animation-delay:.15s}.result-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 0}.result-head h2{margin:0;font-size:17px}.count{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.045);color:var(--muted);font-size:11px}.table-wrap{overflow:auto;max-height:470px;margin:14px 18px 18px;border:1px solid var(--line);border-radius:15px}.table-wrap::-webkit-scrollbar{width:9px;height:9px}.table-wrap::-webkit-scrollbar-thumb{background:#2a3450;border-radius:20px}table{width:100%;border-collapse:collapse;min-width:520px;direction:ltr}th,td{padding:11px 13px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap;max-width:340px;overflow:hidden;text-overflow:ellipsis}th{position:sticky;top:0;background:#11182a;color:#cfc7ff;font-size:12px;z-index:1}td{color:#d1d9e8;font-size:12px}tbody tr{transition:background .15s}tbody tr:hover{background:rgba(124,92,255,.06)}tbody tr:last-child td{border-bottom:0}.empty{padding:52px 20px;text-align:center;color:var(--muted);font-size:13px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.feature{padding:14px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);transition:transform .2s,border-color .2s}.feature:hover{transform:translateY(-3px);border-color:rgba(124,92,255,.3)}.feature b{display:block;font-size:13px;margin-bottom:4px}.feature span{font-size:11px;color:var(--muted)}footer{text-align:center;color:#5f6b83;font-size:11px;margin-top:18px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;padding:10px 15px;border:1px solid var(--line);border-radius:12px;background:#121a2b;box-shadow:0 15px 40px rgba(0,0,0,.3);font-size:12px;pointer-events:none;transition:.25s;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes pulse{50%{opacity:.45;transform:scale(.75)}}
+@media(max-width:650px){.container{padding-top:16px}.hero{padding-top:18px}h1{letter-spacing:-2px}.features{grid-template-columns:1fr}.shortcut{display:none}.toolbar button{flex:1 1 calc(50% - 5px)}textarea{height:280px}.card{border-radius:18px}.result-head{align-items:flex-start;gap:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-  <main class="container">
-    <header>
-      <div class="logo">⚡ يعمل بالكامل داخل المتصفح</div>
-      <h1>JSON → CSV</h1>
-      <p>الصق JSON، حوّله إلى CSV، وانسخه أو حمّله. بدون رفع ملفات وبدون حساب.</p>
-    </header>
-
-    <section class="card editor">
-      <div class="label-row">
-        <span class="label">JSON</span>
-        <span class="hint">يفضل أن يكون Array من Objects</span>
-      </div>
-      <textarea id="jsonInput" spellcheck="false" placeholder='[
+<main class="container">
+<header class="hero"><div class="badge"><i class="dot"></i> محلي 100% · لا يتم رفع بياناتك</div><h1><span>JSON → CSV</span></h1><p>الصق بيانات JSON وحوّلها إلى CSV خلال ثوانٍ. معاينة فورية، نسخ وتحميل، وكل المعالجة تتم على جهازك.</p></header>
+<section class="card editor">
+<div class="label-row"><span class="label">بيانات JSON</span><span class="hint">Object أو Array من Objects</span></div>
+<textarea id="jsonInput" spellcheck="false" autocomplete="off" placeholder='[
   {"name":"Ahmad","age":20,"city":"Gaza"},
   {"name":"Omar","age":22,"city":"Rafah"}
 ]'></textarea>
-
-      <div class="actions">
-        <button class="primary" id="convertBtn">تحويل إلى CSV</button>
-        <button id="clearBtn">مسح</button>
-        <button id="copyBtn" disabled>نسخ CSV</button>
-        <button id="downloadBtn" disabled>تحميل CSV</button>
-      </div>
-      <div id="status" class="status"></div>
-    </section>
-
-    <section class="card result" aria-live="polite">
-      <div class="result-head">
-        <h2>معاينة النتيجة</h2>
-        <span class="hint" id="rowCount">لا توجد بيانات</span>
-      </div>
-      <div id="tableContainer" class="empty">الصق JSON ثم اضغط «تحويل إلى CSV»</div>
-    </section>
-
-    <footer>JSON → CSV · التحويل يتم محليًا على جهازك</footer>
-  </main>
-
-  <script>
-    const input = document.getElementById('jsonInput');
-    const convertBtn = document.getElementById('convertBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const status = document.getElementById('status');
-    const tableContainer = document.getElementById('tableContainer');
-    const rowCount = document.getElementById('rowCount');
-
-    let csvOutput = '';
-
-    function flatten(value, prefix = '', out = {}) {
-      if (value === null || value === undefined) {
-        if (prefix) out[prefix] = '';
-        return out;
-      }
-      if (Array.isArray(value)) {
-        if (!prefix) return out;
-        const simple = value.every(v => v === null || ['string','number','boolean'].includes(typeof v));
-        out[prefix] = simple ? value.join(', ') : JSON.stringify(value);
-        return out;
-      }
-      if (typeof value === 'object') {
-        const keys = Object.keys(value);
-        if (!keys.length && prefix) out[prefix] = '{}';
-        for (const key of keys) {
-          flatten(value[key], prefix ? `${prefix}.${key}` : key, out);
-        }
-        return out;
-      }
-      if (prefix) out[prefix] = value;
-      return out;
-    }
-
-    function normalizeData(parsed) {
-      if (Array.isArray(parsed)) return parsed;
-      if (parsed && typeof parsed === 'object') return [parsed];
-      throw new Error('JSON يجب أن يكون Object أو Array.');
-    }
-
-    function csvEscape(value) {
-      const text = value === null || value === undefined ? '' : String(value);
-      return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
-    }
-
-    function buildCSV(rows) {
-      const flattened = rows.map(row => flatten(row));
-      const columns = [...new Set(flattened.flatMap(row => Object.keys(row)))];
-      if (!columns.length) throw new Error('لم يتم العثور على بيانات قابلة للتحويل.');
-      const lines = [columns.map(csvEscape).join(',')];
-      for (const row of flattened) {
-        lines.push(columns.map(column => csvEscape(row[column] ?? '')).join(','));
-      }
-      return { csv: lines.join('\r\n'), columns, rows: flattened };
-    }
-
-    function renderTable(columns, rows) {
-      const table = document.createElement('table');
-      const thead = document.createElement('thead');
-      const headRow = document.createElement('tr');
-      columns.forEach(column => {
-        const th = document.createElement('th');
-        th.textContent = column;
-        headRow.appendChild(th);
-      });
-      thead.appendChild(headRow);
-      table.appendChild(thead);
-
-      const tbody = document.createElement('tbody');
-      rows.forEach(row => {
-        const tr = document.createElement('tr');
-        columns.forEach(column => {
-          const td = document.createElement('td');
-          td.textContent = row[column] ?? '';
-          tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
-
-      tableContainer.className = 'table-wrap';
-      tableContainer.replaceChildren(table);
-    }
-
-    function setStatus(message = '', type = '') {
-      status.textContent = message;
-      status.className = `status ${type}`;
-    }
-
-    function convert() {
-      setStatus('');
-      const raw = input.value.trim();
-      if (!raw) {
-        setStatus('الصق JSON أولًا.', 'error');
-        return;
-      }
-
-      try {
-        const parsed = JSON.parse(raw);
-        const data = normalizeData(parsed);
-        const result = buildCSV(data);
-        csvOutput = result.csv;
-        renderTable(result.columns, result.rows);
-        rowCount.textContent = `${result.rows.length} صف · ${result.columns.length} عمود`;
-        copyBtn.disabled = false;
-        downloadBtn.disabled = false;
-        setStatus('تم التحويل بنجاح.', 'success');
-      } catch (error) {
-        csvOutput = '';
-        copyBtn.disabled = true;
-        downloadBtn.disabled = true;
-        rowCount.textContent = 'لا توجد بيانات';
-        tableContainer.className = 'empty';
-        tableContainer.textContent = 'تعذر تحويل JSON.';
-        setStatus(error instanceof SyntaxError ? 'JSON غير صالح. راجع الأقواس والفواصل وعلامات الاقتباس.' : error.message, 'error');
-      }
-    }
-
-    convertBtn.addEventListener('click', convert);
-
-    clearBtn.addEventListener('click', () => {
-      input.value = '';
-      csvOutput = '';
-      copyBtn.disabled = true;
-      downloadBtn.disabled = true;
-      rowCount.textContent = 'لا توجد بيانات';
-      tableContainer.className = 'empty';
-      tableContainer.textContent = 'الصق JSON ثم اضغط «تحويل إلى CSV»';
-      setStatus('');
-      input.focus();
-    });
-
-    copyBtn.addEventListener('click', async () => {
-      if (!csvOutput) return;
-      try {
-        await navigator.clipboard.writeText(csvOutput);
-        setStatus('تم نسخ CSV.', 'success');
-      } catch {
-        setStatus('تعذر النسخ تلقائيًا. استخدم النسخ اليدوي.', 'error');
-      }
-    });
-
-    downloadBtn.addEventListener('click', () => {
-      if (!csvOutput) return;
-      const blob = new Blob(["\uFEFF" + csvOutput], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'converted.csv';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-      setStatus('تم تجهيز ملف CSV.', 'success');
-    });
-  </script>
-</body>
-</html>
+<div class="toolbar"><button class="primary" id="convertBtn">⚡ تحويل إلى CSV</button><button id="clearBtn">مسح</button><button id="copyBtn" disabled>نسخ CSV</button><button id="downloadBtn" disabled>تحميل CSV</button><span class="shortcut">Ctrl / ⌘ + Enter للتحويل</span></div>
+<div id="status" class="status"></div>
+</section>
+<section class="features"><div class="feature"><b>🔒 خصوصية</b><span>لا سيرفرات ولا رفع ملفات. التحويل محلي.</span></div><div class="feature"><b>⚡ سريع</b><span>JavaScript خام بدون مكتبات ثقيلة.</span></div><div class="feature"><b>🌐 عربي</b><span>يدعم Unicode وCSV بترميز UTF-8.</span></div></section>
+<section class="card result" aria-live="polite"><div class="result-head"><h2>معاينة CSV</h2><span class="count" id="rowCount">لا توجد بيانات</span></div><div id="tableContainer" class="empty">الصق JSON ثم اضغط «تحويل إلى CSV»</div></section>
+<footer>JSON → CSV · سريع، محلي، وبدون حساب</footer>
+</main><div id="toast" class="toast" role="status"></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);const input=$('jsonInput'),convertBtn=$('convertBtn'),clearBtn=$('clearBtn'),copyBtn=$('copyBtn'),downloadBtn=$('downloadBtn'),status=$('status'),tableContainer=$('tableContainer'),rowCount=$('rowCount'),toast=$('toast');let csvOutput='',toastTimer;
+function flatten(value,prefix='',out={}){if(value==null){if(prefix)out[prefix]='';return out}if(Array.isArray(value)){if(prefix)out[prefix]=value.every(v=>v==null||['string','number','boolean'].includes(typeof v))?value.join(', '):JSON.stringify(value);return out}if(typeof value==='object'){const keys=Object.keys(value);if(!keys.length&&prefix)out[prefix]='{}';for(const key of keys)flatten(value[key],prefix?prefix+'.'+key:key,out);return out}if(prefix)out[prefix]=value;return out}
+function normalize(value){if(Array.isArray(value))return value;if(value&&typeof value==='object')return[value];throw Error('JSON يجب أن يكون Object أو Array.')}function esc(v){const s=v==null?'':String(v);return/[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function build(rows){const flat=rows.map(r=>flatten(r));const cols=[...new Set(flat.flatMap(r=>Object.keys(r)))];if(!cols.length)throw Error('لم يتم العثور على بيانات قابلة للتحويل.');const lines=[cols.map(esc).join(',')];for(const r of flat)lines.push(cols.map(c=>esc(r[c])).join(','));return{csv:lines.join('\r\n'),cols,rows:flat}}
+function render(cols,rows){const table=document.createElement('table'),thead=document.createElement('thead'),hr=document.createElement('tr');for(const c of cols){const th=document.createElement('th');th.textContent=c;hr.append(th)}thead.append(hr);table.append(thead);const tb=document.createElement('tbody'),frag=document.createDocumentFragment();for(const r of rows){const tr=document.createElement('tr');for(const c of cols){const td=document.createElement('td');td.textContent=r[c]??'';tr.append(td)}frag.append(tr)}tb.append(frag);table.append(tb);tableContainer.className='table-wrap';tableContainer.replaceChildren(table)}
+function setStatus(msg='',type=''){status.textContent=msg;status.className='status '+type}function showToast(msg){toast.textContent=msg;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1800)}
+function convert(){setStatus('');const raw=input.value.trim();if(!raw){setStatus('الصق JSON أولًا.','bad');input.focus();return}convertBtn.disabled=true;convertBtn.textContent='جاري التحويل…';requestAnimationFrame(()=>{try{const result=build(normalize(JSON.parse(raw)));csvOutput=result.csv;render(result.cols,result.rows);rowCount.textContent=`${result.rows.length} صف · ${result.cols.length} عمود`;copyBtn.disabled=downloadBtn.disabled=false;setStatus('تم التحويل بنجاح.','good');showToast('تم تحويل JSON إلى CSV')}catch(e){csvOutput='';copyBtn.disabled=downloadBtn.disabled=true;rowCount.textContent='لا توجد بيانات';tableContainer.className='empty';tableContainer.textContent='تعذر تحويل JSON.';setStatus(e instanceof SyntaxError?'JSON غير صالح. راجع الأقواس والفواصل وعلامات الاقتباس.':e.message,'bad')}finally{convertBtn.disabled=false;convertBtn.textContent='⚡ تحويل إلى CSV'}})}
+convertBtn.onclick=convert;clearBtn.onclick=()=>{input.value='';csvOutput='';copyBtn.disabled=downloadBtn.disabled=true;rowCount.textContent='لا توجد بيانات';tableContainer.className='empty';tableContainer.textContent='الصق JSON ثم اضغط «تحويل إلى CSV»';setStatus('');input.focus();showToast('تم المسح')};copyBtn.onclick=async()=>{if(!csvOutput)return;try{await navigator.clipboard.writeText(csvOutput);setStatus('تم نسخ CSV.','good');showToast('تم نسخ CSV')}catch{setStatus('تعذر النسخ تلقائيًا.','bad')}};downloadBtn.onclick=()=>{if(!csvOutput)return;const blob=new Blob(['\uFEFF'+csvOutput],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='converted.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus('تم تجهيز ملف CSV.','good');showToast('تم تحميل CSV')};input.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();convert()}});
+</script>
+</body></html>
