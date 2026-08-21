@@ -1,0 +1,6 @@
+name = "quiz-ai"
+main = "index.js"
+compatibility_date = "2026-08-21"
+
+[ai]
+binding = "AI"
